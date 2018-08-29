@@ -1,6 +1,8 @@
 
 import React from 'react';
 
+import * as echarts from 'echarts';
+
 class App extends React.Component {
 
     constructor(props) {
@@ -8,13 +10,15 @@ class App extends React.Component {
         this.state = {
             items: []
         };
+
+        this.createChart = this.createChart.bind(this);
     }
 
     componentDidMount() {
 
         const xhr = new XMLHttpRequest();
 
-        xhr.open('GET', 'http://localhost:3000/posts');
+        xhr.open('GET', 'http://localhost:3000/data');
         xhr.onload = () => {
 
             if (xhr.status === 200) {
@@ -23,6 +27,7 @@ class App extends React.Component {
                 // const res = xhr.responseText;
 
                 log.warn('test', res);
+                this.createChart(res);
 
                 this.setState({items: res});
 
@@ -34,6 +39,38 @@ class App extends React.Component {
         xhr.send(null);
     }
 
+    createChart(rdata) {
+
+        const amountArr = rdata.food.map((item) => item.amount);
+
+        const myChart = echarts.init(this.ChartElem);
+
+        const option = {
+            title: {
+                text: 'ECharts entry example'
+            },
+            tooltip: {},
+            legend: {
+                data: ['Sales']
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: 'Sales',
+                data: amountArr,
+                type: 'line',
+                smooth: true
+            }]
+        };
+
+        myChart.setOption(option);
+    }
+
     render() {
 
         return <div>
@@ -41,9 +78,7 @@ class App extends React.Component {
             <br/>
             <hr/>
             <br/>
-            <ul>
-                {this.state.items.map((item) => <li key={item.id}>{item.title}</li>)}
-            </ul>
+            <div ref={ChartElem => this.ChartElem = ChartElem} style={{width: '500px', height: '500px'}} />
         </div>;
     }
 }

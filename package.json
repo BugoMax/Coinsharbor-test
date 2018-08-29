@@ -10,7 +10,7 @@
     "start": "concurrently \"npm run dev\" \"npm run db\"",
     "dev": "webpack-dev-server --debug --hot --devtool eval-source-map --output-pathinfo --watch --colors --inline --content-base public --port 8080",
     "build": "webpack --config webpack.config.prod.js -p",
-    "db": "json-server --watch ./db/db.json",
+    "db": "json-server --watch ./db/index.js",
     "analyze-bundle": "webpack --config webpack-analyze.config.prod.js -p"
   },
   "author": "Maxim Rozhaev",
