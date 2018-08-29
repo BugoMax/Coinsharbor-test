@@ -11,6 +11,7 @@ const books = [
 ];
 const transport = ["car", "taxi", "bus"];
 const restaurants = ["Whisky Corner", "BAO Modern Chinese Cuisine", "Black Market Restaurant"];
+const monthsArr = [null, "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
 const getRandomNumber = (max) => Math.floor(Math.random() * max) + 1;
 
@@ -21,8 +22,9 @@ const createItem = (index, title, maxAmount) => ({
     currency: "USD",
     date: {
         year: 2018,
-        month: getRandomNumber(12),
-        day: getRandomNumber(31)
+        month: monthsArr[getRandomNumber(12)],
+        day: getRandomNumber(31),
+        hour: getRandomNumber(24)
     }
 });
 
@@ -37,20 +39,11 @@ module.exports = () => {
         }
     };
 
-    for (let i = 0; i < food.length; i++) {
-        obj.data.food.push(createItem(i, food[i], 200));
-    }
-
-    for (let i = 0; i < 21; i++) {
-        obj.data.transport.push(createItem(i, transport[getRandomNumber(3)], 100));
-    }
-
-    for (let i = 0; i < books.length; i++) {
-        obj.data.books.push(createItem(i, books[i], 200));
-    }
-
-    for (let i = 0; i < restaurants.length; i++) {
-        obj.data.restaurants.push(createItem(i, restaurants[i], 500));
+    for (let i = 0; i < 41; i++) {
+        obj.data.food.push(createItem(i, food[getRandomNumber(food.length - 1)], 200));
+        obj.data.transport.push(createItem(i, transport[getRandomNumber(transport.length - 1)], 100));
+        obj.data.books.push(createItem(i, books[getRandomNumber(books.length - 1)], 200));
+        obj.data.restaurants.push(createItem(i, restaurants[getRandomNumber(books.length - 1)], 500));
     }
 
     return obj;

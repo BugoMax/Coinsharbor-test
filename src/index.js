@@ -8,13 +8,22 @@ import thunk from 'redux-thunk';
 
 import App from './app/App.jsx';
 
-import reducers from './reducers/reducers';
+import configurateReducers from './configurate-reducers';
+import getData from './request/getData';
 
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
+const appPromise = getData('http://localhost:3000/data');
 
-ReactDOM.render(
-    <Provider store={store}>
-        <App/>
-    </Provider>,
-    document.getElementById('container')
+appPromise.then(
+    (appData) => {
+
+        const reducer = configurateReducers(appData);
+        const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
+
+        ReactDOM.render(
+            <Provider store={store}>
+                <App/>
+            </Provider>,
+            document.getElementById('container')
+        );
+    }
 );
