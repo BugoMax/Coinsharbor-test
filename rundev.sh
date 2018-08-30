@@ -1,9 +1,9 @@
 #!/bin/bash
 
-echo 'Run visitor devserver'
+echo 'Run devserver'
 echo
 echo 'Open localhost:8080'
 echo
 echo
 
-npm run devserver
+npm run start

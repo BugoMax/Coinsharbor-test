@@ -1,21 +1,6 @@
 #!/bin/bash
 
-#echo 'Installing node_modules at parent directory'
-#echo
-
-#cd ../../
-#npm install
-
-#echo 'Installing node_modules at iframe-app'
-#echo
-
-#cd visitor/dev/iframe-app
-#npm install
-
-#cd ../
-
-#echo 'Installing node_modules and run devserver.'
-#echo
+echo 'Installing node_modules and run devserver - http://localhost:8080.'
 
 npm install
-npm run devserver
+npm run start
