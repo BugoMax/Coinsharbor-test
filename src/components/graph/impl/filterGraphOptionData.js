@@ -19,10 +19,21 @@ const filterGraphOptionData = (store, month) => {
             .sort((a, b) => a - b);
     };
 
-    const food = handleFilterOption(store.food);
-    const books = handleFilterOption(store.books);
-    const transport = handleFilterOption(store.transport);
-    const restaurants = handleFilterOption(store.restaurants);
+    const food = currentMonth !== 'total'
+        ? handleFilterOption(store.food)
+        : store.food.map((item) => handleAddDaysAndGetAmount(item));
+
+    const books = currentMonth !== 'total'
+        ? handleFilterOption(store.books)
+        : store.books.map((item) => handleAddDaysAndGetAmount(item));
+
+    const transport = currentMonth !== 'total'
+        ? handleFilterOption(store.transport)
+        : store.transport.map((item) => handleAddDaysAndGetAmount(item));
+
+    const restaurants = currentMonth !== 'total'
+        ? handleFilterOption(store.restaurants)
+        : store.restaurants.map((item) => handleAddDaysAndGetAmount(item));
 
     days = days.sort((a, b) => a - b).map((item) => `${item} ${currentMonth}`);
 

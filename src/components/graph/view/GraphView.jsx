@@ -25,6 +25,9 @@ class GraphView extends React.Component {
 
         const myChart = echarts.init(this.ChartElem);
         const option = {
+            title: {
+                text: this.props.displayOption.selectedMonth
+            },
             tooltip: {},
             legend: {
                 data: ['Food', 'Books', 'Transport', 'Restaurants']
@@ -80,9 +83,14 @@ class GraphView extends React.Component {
                         key={i}
                     />
                 )}
+                <BottomNavigationAction
+                    label="Total"
+                    value="Total"
+                    onClick={() => this.props.onChangeMonth('total')}
+                />
             </BottomNavigation>
 
-            <div ref={ChartElem => this.ChartElem = ChartElem} style={{width: '500px', height: '500px'}} />
+            <div ref={ChartElem => this.ChartElem = ChartElem} style={{width: '100%', height: '500px'}} />
         </div>;
     }
 }

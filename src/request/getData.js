@@ -12,11 +12,11 @@ const getData = (link) => {
             if (xhr.status === 200) {
 
                 const data = JSON.parse(xhr.responseText);
-                log.warn('DATA', data);
 
                 resolve(data);
 
             } else {
+
                 console.error('Error in request. Status: ' + xhr.status);
                 console.error('Response text: ' + xhr.responseText);
 

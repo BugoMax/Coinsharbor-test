@@ -1,11 +1,11 @@
 
 import React from 'react';
-
-// import * as echarts from 'echarts';
-import Graph from '../components/graph/Graph';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+
+import Graph from '../components/graph/Graph';
+import Table from '../components/table/Table';
 
 class App extends React.Component {
 
@@ -20,6 +20,7 @@ class App extends React.Component {
             </AppBar>
 
             <Graph/>
+            <Table/>
         </div>;
     }
 }
